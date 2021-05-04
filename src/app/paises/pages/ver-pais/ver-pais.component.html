@@ -1,1 +1,39 @@
-<p>ver-pais works!</p>
+<div *ngIf="!pais; else divPais" class="alert alert-info">
+  Cargando...
+</div>
+
+
+<ng-template #divPais>
+  <div class="row">
+    <div class="col-2">
+      <img class="big-flag" [src]="pais.flag" alt="">
+      <small> {{pais.demonym}} </small>
+    </div>
+    <div class="col-9">
+      <h1>Pais: <small> {{pais.name}} </small></h1>
+      <ul class="list-group">
+        <li class="list-group-item">
+          Población: {{pais.population |number}}
+        </li>
+        <li class="list-group-item"> {{pais.area |number}}Km </li>
+        <li class="list-group-item"> {{pais.subregion}} </li>
+      </ul>
+
+      <h3>Traducciones</h3>
+      <span class="badge bg-primary mr-1"> {{pais.translations.br}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.de}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.es}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.fa}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.fr}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.hr}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.it}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.ja}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.nl}} </span>
+      <span class="badge bg-primary mr-1"> {{pais.translations.pt}} </span>
+
+    </div>
+  </div>
+  <pre>
+    {{pais |json}}
+  </pre>
+</ng-template>
