@@ -5,7 +5,15 @@ import { Country } from '../../interfaces/pais.interface';
 @Component({
   selector: 'app-pais',
   templateUrl: './pais.component.html',
-  styles: [],
+  styles: [
+    `
+    li{
+      cursor: pointer;
+    }
+    
+    
+    `
+  ],
 })
 export class PaisComponent {
   constructor(private paisService: PaisService) {}
@@ -13,6 +21,8 @@ export class PaisComponent {
   termino: string = '';
   error: boolean = false;
   paises: Country[] = [];
+  paisesSugeridos: Country[] = [];
+  mostrarSugerencias: boolean = false
 
   buscar(termino: string) {
     this.error = false;
@@ -32,6 +42,23 @@ export class PaisComponent {
   }
 
   sugerencias(termino: string) {
-    this.error = false;
+    this.error = false
+    this.termino = termino
+    this.mostrarSugerencias = true
+
+    if(termino !== ''){
+      this.buscar(termino)
+      this.paisService.buscarPais(termino)
+        .subscribe(paises => this.paisesSugeridos = paises.splice(0,5),(err) => {
+          this.paisesSugeridos = []
+          this.error = true
+        })
+
+    }else{
+      this.mostrarSugerencias = false
+      this.paises = []
+    }
   }
+
+  
 }

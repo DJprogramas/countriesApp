@@ -14,6 +14,8 @@ export class PaisInputComponent implements OnInit {
   
   @Output()
   onEnter: EventEmitter<string> = new EventEmitter()
+
+ 
   
   @Output()
   onDebounce: EventEmitter<string> = new EventEmitter()
@@ -35,11 +37,11 @@ export class PaisInputComponent implements OnInit {
 
   buscar(){
     this.onEnter.emit(this.termino)
-    
   }
 
   teclaPresionada(){
     this.debouncer.next(this.termino)
+    if(this.debouncer) this.buscar
   }
 
 }
